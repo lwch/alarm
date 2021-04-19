@@ -1,2 +1,4 @@
 # drinking
-vscode drink extension
+
+vscode drinking water alarm extension.
+
