@@ -1,7 +1,7 @@
 {
   "name": "alarm",
   "displayName": "alarm",
-  "description": "remind for drink and activity",
+  "description": "remind for drink water and activity",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.46.0"
@@ -15,24 +15,43 @@
   "activationEvents": [
     "*"
   ],
-  "main": "./extension.js",
+  "main": "./out/extension.js",
   "contributes": {
-    "commands": []
+    "commands": [],
+    "configuration":{
+      "title": "alarm",
+      "properties": {
+        "alarm.gists.token": {
+          "type": "string",
+          "description": "gists token for log"
+        }
+      }
+    }
   },
   "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "node ./test/runTest.js"
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
     "@types/mocha": "^8.0.4",
     "@types/node": "^12.11.7",
     "@types/vscode": "^1.46.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
     "eslint": "^7.19.0",
     "glob": "^7.1.6",
     "mocha": "^8.2.1",
     "typescript": "^4.1.3",
     "vscode-test": "^1.5.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "moment": "^2.29.1",
+    "node-schedule": "^2.0.0"
   }
 }
